@@ -55,7 +55,7 @@
 
 		    	<h3 class="text-3xl font-bold text-center">Inscrivez-vous et imprimez votre pass</h3>
 
-		    	<form method="POST" action="{{ route('clients.store') }}" class="bg-white px-12 py-6 rounded-lg text-gray-800 mt-10">
+		    	<form method="POST" action="{{ route('reservations.store') }}" class="bg-white px-12 py-6 rounded-lg text-gray-800 mt-10">
 
 		    		@csrf
 
@@ -187,6 +187,20 @@
 		    		<div class="flex flex-col mt-6">
 		    			<label class="mb-2">Confirmation de l'adresse e-mail <sup>*</sup></label>
 		    			<input type="email" value="{{ old('email_confirmation') }}" name="email_confirmation" class="px-4 py-1 w-full rounded border hover:border-blue-500">
+		    		</div>
+
+		    		<div class="flex flex-col mt-6">
+		    			<label class="mb-2">Période<sup>*</sup></label>
+		    			<label>
+		    				<input type="radio" value="morning" name="period" class="px-4 py-1 rounded border hover:border-blue-500" {{ $morningCount >= $maxPlaces ? 'disabled' : '' }}> <span class="@if($morningCount >= $maxPlaces) line-through @endif">Matin <span class="text-xs text-gray-500">({{ $maxPlaces - $morningCount }} disponible)</span></span>
+		    			</label>
+		    			<label class="mt-2">
+		    				<input type="radio" value="evening" name="period" class="px-4 py-1 rounded border hover:border-blue-500" {{ $eveningCount >= $maxPlaces ? 'disabled' : '' }}> <span class="@if($eveningCount >= $maxPlaces) line-through @endif">Soir <span class="text-xs text-gray-500">({{ $maxPlaces - $eveningCount }} disponible)</span></span>
+		    			</label>
+
+		    			@error('period')
+		    			    <div class="text-sm text-red-500">{{ $message }}</div>
+		    			@enderror
 		    		</div>
 
 		    		<div class="mt-6">

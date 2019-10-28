@@ -12,10 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('reservation');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/clients', 'ClientController@store')->name('clients.store');
+Route::get('/', 'ReservationController@create')->name('reservations.create');
+Route::post('/reservations', 'ReservationController@store')->name('reservations.store');
