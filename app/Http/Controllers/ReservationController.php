@@ -24,15 +24,15 @@ class ReservationController extends Controller
 
     public function store(ReservationRequest $request)
     {
-    	$reservation = Reservation::create($request->validated());
+    	$request->validate([
+    		'period' => 'required|in:morning,evening',
+    	]);
 
     	if (Reservation::where('name', $request->period)->count() >= Period::MAX) {
     		return new Exception('Reservations has closed');
     	}
 
-    	$request->validate([
-    		'period' => 'required|in:morning,evening',
-    	]);
+    	$reservation = Reservation::create($request->validated());
 
     	$reservation->periods()->create([
     		'name' => $request->period,

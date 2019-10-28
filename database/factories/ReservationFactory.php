@@ -18,6 +18,7 @@ $factory->define(Reservation::class, function (Faker $faker) {
         'education' => $faker->word,
         'phone' => 1234567890,
         'email' => $email,
-        // 'period' => Arr::random(['morning', 'evening']),
+        'email_confirmation' => $email,
+        'period' => Arr::random(['morning', 'evening']),
     ];
 });
