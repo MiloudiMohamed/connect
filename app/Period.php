@@ -10,4 +10,14 @@ class Period extends Model
 
     protected $guarded = [];
 
+    public function scopeAvailableOn($builder, $value)
+    {
+    	return $builder->where('name', $value)->count() < self::MAX;
+    }
+
+    public function scopeAvailableTodayOn($builder, $value)
+    {
+    	return $builder->whereDate('created_at', today())->where('name', $value)->count() < self::MAX;
+    }
+
 }

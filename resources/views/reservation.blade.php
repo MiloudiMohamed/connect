@@ -192,10 +192,10 @@
 		    		<div class="flex flex-col mt-6">
 		    			<label class="mb-2">Période<sup>*</sup></label>
 		    			<label>
-		    				<input type="radio" value="morning" name="period" class="px-4 py-1 rounded border hover:border-blue-500" {{ $morningCount >= $maxPlaces ? 'disabled' : '' }}> <span class="@if($morningCount >= $maxPlaces) line-through @endif">Matin <span class="text-xs text-gray-500">({{ $maxPlaces - $morningCount }} disponible)</span></span>
+		    				<input type="radio" value="morning" name="period" class="px-4 py-1 rounded border hover:border-blue-500" {{ !$morningCount ? 'disabled' : '' }}> <span class="@if(!$morningCount) line-through @endif">Matin </span>
 		    			</label>
 		    			<label class="mt-2">
-		    				<input type="radio" value="evening" name="period" class="px-4 py-1 rounded border hover:border-blue-500" {{ $eveningCount >= $maxPlaces ? 'disabled' : '' }}> <span class="@if($eveningCount >= $maxPlaces) line-through @endif">Soir <span class="text-xs text-gray-500">({{ $maxPlaces - $eveningCount }} disponible)</span></span>
+		    				<input type="radio" value="evening" name="period" class="px-4 py-1 rounded border hover:border-blue-500" {{ !$eveningCount ? 'disabled' : '' }}> <span class="@if(!$eveningCount) line-through @endif">Soir</span>
 		    			</label>
 
 		    			@error('period')

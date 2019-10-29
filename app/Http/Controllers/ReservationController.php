@@ -15,8 +15,9 @@ class ReservationController extends Controller
 	public function create()
 	{
 		$periods = Period::get();
-		$morningCount = Period::where('name', 'morning')->count();
-		$eveningCount = Period::where('name', 'evening')->count();
+		$morningCount = Period::availableOn('morning');
+		$eveningCount = Period::availableOn('evening');
+
 		$maxPlaces = Period::MAX;
 
 		return view('reservation', compact('periods', 'morningCount', 'eveningCount', 'maxPlaces'));
@@ -28,7 +29,7 @@ class ReservationController extends Controller
     		'period' => 'required|in:morning,evening',
     	]);
 
-    	if (Reservation::where('name', $request->period)->count() >= Period::MAX) {
+    	if (! Period::availableOn($request->period) ) {
     		return new Exception('Reservations has closed');
     	}
 
