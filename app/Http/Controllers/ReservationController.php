@@ -18,9 +18,7 @@ class ReservationController extends Controller
 		$morningCount = Period::availableOn('morning');
 		$eveningCount = Period::availableOn('evening');
 
-		$maxPlaces = Period::MAX;
-
-		return view('reservation', compact('periods', 'morningCount', 'eveningCount', 'maxPlaces'));
+		return view('reservation', compact('periods', 'morningCount', 'eveningCount'));
 	}
 
     public function store(ReservationRequest $request)
